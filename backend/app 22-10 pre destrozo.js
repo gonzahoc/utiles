@@ -274,49 +274,37 @@ app.post('/api/formulario', upload.any(), (req, res) => {
     console.log('Files:', req.files);
     res.status(200).json({ message: 'Formulario enviado y correo electrónico enviado exitosamente' });
 
-    // const { nombre, telefono, mail } = req.body;
-    // //esto (?)
-    // //return res.status(200).json({ message: req.body });
-    // // esto (?)
-    // // Obtener datos de los hijos
-    // const hijos = [];
-    // for (let i = 0; req.body[`hijos[${i}].apellidoynombre`]; i++) {
-    //   hijos.push({
-    //     apellidoynombre: req.body[`hijos[${i}].apellidoynombre`],
-    //     edad: req.body[`hijos[${i}].edad`],
-    //     ciclolectivo: req.body[`hijos[${i}].ciclolectivo`],
-    //     escuela: req.body[`hijos[${i}].escuela`],
-    //     estatal: req.body[`hijos[${i}].estatal`],
-    //     privada: req.body[`hijos[${i}].privada`],
-    //     talleguardapolvo: req.body[`hijos[${i}].talleguardapolvo`],
-    //     dnifrente: req.files.find(file => file.fieldname === `hijos[${i}].dnifrente`) ? req.files.find(file => file.fieldname === `hijos[${i}].dnifrente`).filename : null,
-    //     dnidorso: req.files.find(file => file.fieldname === `hijos[${i}].dnidorso`) ? req.files.find(file => file.fieldname === `hijos[${i}].dnidorso`).filename : null,
-    //     constanciaBoletin: req.files.find(file => file.fieldname === `hijos[${i}].constanciaBoletin`) ? req.files.find(file => file.fieldname === `hijos[${i}].constanciaBoletin`).filename : null
-    //   });
-    // }
+    const { nombre, telefono, mail } = req.body;
+    //esto (?)
+    //return res.status(200).json({ message: req.body });
+    // esto (?)
+    // Obtener datos de los hijos
+    const hijos = [];
+    for (let i = 0; req.body[`hijos[${i}].apellidoynombre`]; i++) {
+      hijos.push({
+        apellidoynombre: req.body[`hijos[${i}].apellidoynombre`],
+        edad: req.body[`hijos[${i}].edad`],
+        ciclolectivo: req.body[`hijos[${i}].ciclolectivo`],
+        escuela: req.body[`hijos[${i}].escuela`],
+        estatal: req.body[`hijos[${i}].estatal`],
+        privada: req.body[`hijos[${i}].privada`],
+        talleguardapolvo: req.body[`hijos[${i}].talleguardapolvo`],
+        dnifrente: req.files.find(file => file.fieldname === `hijos[${i}].dnifrente`) ? req.files.find(file => file.fieldname === `hijos[${i}].dnifrente`).filename : null,
+        dnidorso: req.files.find(file => file.fieldname === `hijos[${i}].dnidorso`) ? req.files.find(file => file.fieldname === `hijos[${i}].dnidorso`).filename : null,
+        constanciaBoletin: req.files.find(file => file.fieldname === `hijos[${i}].constanciaBoletin`) ? req.files.find(file => file.fieldname === `hijos[${i}].constanciaBoletin`).filename : null
+      });
+    }
 
-    // const userValues = {
-    //   nombre,
-    //   telefono,
-    //   reciboSueldo: req.files.find(file => file.fieldname === 'reciboSueldo') ? req.files.find(file => file.fieldname === 'reciboSueldo').filename : null,
-    //   dniFrente: req.files.find(file => file.fieldname === 'dniFrente') ? req.files.find(file => file.fieldname === 'dniFrente').filename : null,
-    //   dniDorso: req.files.find(file => file.fieldname === 'dniDorso') ? req.files.find(file => file.fieldname === 'dniDorso').filename : null,
-    //   carnetSindicalFrente: req.files.find(file => file.fieldname === 'carnetSindicalFrente') ? req.files.find(file => file.fieldname === 'carnetSindicalFrente').filename : null,
-    //   carnetSindicalDorso: req.files.find(file => file.fieldname === 'carnetSindicalDorso') ? req.files.find(file => file.fieldname === 'carnetSindicalDorso').filename : null
-    // };
+    const userValues = {
+      nombre,
+      telefono,
+      reciboSueldo: req.files.find(file => file.fieldname === 'reciboSueldo') ? req.files.find(file => file.fieldname === 'reciboSueldo').filename : null,
+      dniFrente: req.files.find(file => file.fieldname === 'dniFrente') ? req.files.find(file => file.fieldname === 'dniFrente').filename : null,
+      dniDorso: req.files.find(file => file.fieldname === 'dniDorso') ? req.files.find(file => file.fieldname === 'dniDorso').filename : null,
+      carnetSindicalFrente: req.files.find(file => file.fieldname === 'carnetSindicalFrente') ? req.files.find(file => file.fieldname === 'carnetSindicalFrente').filename : null,
+      carnetSindicalDorso: req.files.find(file => file.fieldname === 'carnetSindicalDorso') ? req.files.find(file => file.fieldname === 'carnetSindicalDorso').filename : null
+    };
 
-    // // const attachments = [
-    // //   userValues.reciboSueldo && { filename: userValues.reciboSueldo, path: path.resolve(__dirname, 'tmp', userValues.reciboSueldo) },
-    // //   userValues.dniFrente && { filename: userValues.dniFrente, path: path.resolve(__dirname, 'tmp', userValues.dniFrente) },
-    // //   userValues.dniDorso && { filename: userValues.dniDorso, path: path.resolve(__dirname, 'tmp', userValues.dniDorso) },
-    // //   userValues.carnetSindicalFrente && { filename: userValues.carnetSindicalFrente, path: path.resolve(__dirname, 'tmp', userValues.carnetSindicalFrente) },
-    // //   userValues.carnetSindicalDorso && { filename: userValues.carnetSindicalDorso, path: path.resolve(__dirname, 'tmp', userValues.carnetSindicalDorso) },
-    // //   ...hijos.flatMap((hijo, index) => [
-    // //     hijo.dnifrente && { filename: hijo.dnifrente, path: path.resolve(__dirname, 'tmp', hijo.dnifrente) },
-    // //     hijo.dnidorso && { filename: hijo.dnidorso, path: path.resolve(__dirname, 'tmp', hijo.dnidorso) },
-    // //     hijo.constanciaBoletin && { filename: hijo.constanciaBoletin, path: path.resolve(__dirname, 'tmp', hijo.constanciaBoletin) }
-    // //   ]).filter(Boolean)
-    // // ];
     // const attachments = [
     //   userValues.reciboSueldo && { filename: userValues.reciboSueldo, path: path.resolve(__dirname, 'tmp', userValues.reciboSueldo) },
     //   userValues.dniFrente && { filename: userValues.dniFrente, path: path.resolve(__dirname, 'tmp', userValues.dniFrente) },
@@ -327,72 +315,84 @@ app.post('/api/formulario', upload.any(), (req, res) => {
     //     hijo.dnifrente && { filename: hijo.dnifrente, path: path.resolve(__dirname, 'tmp', hijo.dnifrente) },
     //     hijo.dnidorso && { filename: hijo.dnidorso, path: path.resolve(__dirname, 'tmp', hijo.dnidorso) },
     //     hijo.constanciaBoletin && { filename: hijo.constanciaBoletin, path: path.resolve(__dirname, 'tmp', hijo.constanciaBoletin) }
-    //   ])
-    // ].filter((attachment) => {
-    //   if (!attachment) return false;
-    //   console.log(`Adjuntando archivo: ${attachment.filename}`);
-    //   return true;
-    // });
-    // attachments.forEach(attachment => {
-    //   console.log('Checking attachment:', attachment);
-    //   if (!fs.existsSync(attachment.path)) {
-    //     console.error('File does not exist:', attachment.path);
-    //   }
-    // });
-    // // Prepara el correo electrónico
-    // const mailOptions = {
-    //   from: 'entregadeutiles@stipa.org.ar',
-    //   to: 'hocgonzalo@gmail.com',
-    //   cc: mail,
-    //   subject: 'Formulario de Datos',
-    //   html: `
-    //       <h2>Información del Usuario</h2>
-    //       <p><strong>Nombre:</strong> ${nombre}</p>
-    //       <p><strong>Teléfono:</strong> ${telefono}</p>
-    //       <p><strong>Email:</strong> ${mail}</p>
+    //   ]).filter(Boolean)
+    // ];
+    const attachments = [
+      userValues.reciboSueldo && { filename: userValues.reciboSueldo, path: path.resolve(__dirname, 'tmp', userValues.reciboSueldo) },
+      userValues.dniFrente && { filename: userValues.dniFrente, path: path.resolve(__dirname, 'tmp', userValues.dniFrente) },
+      userValues.dniDorso && { filename: userValues.dniDorso, path: path.resolve(__dirname, 'tmp', userValues.dniDorso) },
+      userValues.carnetSindicalFrente && { filename: userValues.carnetSindicalFrente, path: path.resolve(__dirname, 'tmp', userValues.carnetSindicalFrente) },
+      userValues.carnetSindicalDorso && { filename: userValues.carnetSindicalDorso, path: path.resolve(__dirname, 'tmp', userValues.carnetSindicalDorso) },
+      ...hijos.flatMap((hijo, index) => [
+        hijo.dnifrente && { filename: hijo.dnifrente, path: path.resolve(__dirname, 'tmp', hijo.dnifrente) },
+        hijo.dnidorso && { filename: hijo.dnidorso, path: path.resolve(__dirname, 'tmp', hijo.dnidorso) },
+        hijo.constanciaBoletin && { filename: hijo.constanciaBoletin, path: path.resolve(__dirname, 'tmp', hijo.constanciaBoletin) }
+      ])
+    ].filter((attachment) => {
+      if (!attachment) return false;
+      console.log(`Adjuntando archivo: ${attachment.filename}`);
+      return true;
+    });
+    attachments.forEach(attachment => {
+      console.log('Checking attachment:', attachment);
+      if (!fs.existsSync(attachment.path)) {
+        console.error('File does not exist:', attachment.path);
+      }
+    });
+    // Prepara el correo electrónico
+    const mailOptions = {
+      from: 'entregadeutiles@stipa.org.ar',
+      to: 'hocgonzalo@gmail.com',
+      cc: mail,
+      subject: 'Formulario de Datos',
+      html: `
+          <h2>Información del Usuario</h2>
+          <p><strong>Nombre:</strong> ${nombre}</p>
+          <p><strong>Teléfono:</strong> ${telefono}</p>
+          <p><strong>Email:</strong> ${mail}</p>
   
-    //       <h3>Archivos Adjuntos del Usuario</h3>
-    //       <ul>
-    //         <li><strong>Recibo de Sueldo:</strong> ${userValues.reciboSueldo ? `<a href="cid:reciboSueldo">Descargar</a>` : 'No adjunto'}</li>
-    //         <li><strong>DNI Frente:</strong> ${userValues.dniFrente ? `<a href="cid:dniFrente">Descargar</a>` : 'No adjunto'}</li>
-    //         <li><strong>DNI Dorso:</strong> ${userValues.dniDorso ? `<a href="cid:dniDorso">Descargar</a>` : 'No adjunto'}</li>
-    //         <li><strong>Carnet Sindical Frente:</strong> ${userValues.carnetSindicalFrente ? `<a href="cid:carnetSindicalFrente">Descargar</a>` : 'No adjunto'}</li>
-    //         <li><strong>Carnet Sindical Dorso:</strong> ${userValues.carnetSindicalDorso ? `<a href="cid:carnetSindicalDorso">Descargar</a>` : 'No adjunto'}</li>
-    //       </ul>
+          <h3>Archivos Adjuntos del Usuario</h3>
+          <ul>
+            <li><strong>Recibo de Sueldo:</strong> ${userValues.reciboSueldo ? `<a href="cid:reciboSueldo">Descargar</a>` : 'No adjunto'}</li>
+            <li><strong>DNI Frente:</strong> ${userValues.dniFrente ? `<a href="cid:dniFrente">Descargar</a>` : 'No adjunto'}</li>
+            <li><strong>DNI Dorso:</strong> ${userValues.dniDorso ? `<a href="cid:dniDorso">Descargar</a>` : 'No adjunto'}</li>
+            <li><strong>Carnet Sindical Frente:</strong> ${userValues.carnetSindicalFrente ? `<a href="cid:carnetSindicalFrente">Descargar</a>` : 'No adjunto'}</li>
+            <li><strong>Carnet Sindical Dorso:</strong> ${userValues.carnetSindicalDorso ? `<a href="cid:carnetSindicalDorso">Descargar</a>` : 'No adjunto'}</li>
+          </ul>
   
-    //       <h3>Información de los Hijos</h3>
-    //       ${hijos.map((hijo, index) => `
-    //         <h4>Hijo ${index + 1}</h4>
-    //         <p><strong>Apellido y Nombre:</strong> ${hijo.apellidoynombre}</p>
-    //         <p><strong>Edad:</strong> ${hijo.edad}</p>
-    //         <p><strong>Ciclo Lectivo:</strong> ${hijo.ciclolectivo}</p>
-    //         <p><strong>Escuela:</strong> ${hijo.escuela}</p>
-    //         <p><strong>Estatal:</strong> ${hijo.estatal ? 'Sí' : 'No'}</p>
-    //         <p><strong>Privada:</strong> ${hijo.privada ? 'Sí' : 'No'}</p>
-    //         <p><strong>Talle Guardapolvo:</strong> ${hijo.talleguardapolvo || 'No aplica'}</p>
+          <h3>Información de los Hijos</h3>
+          ${hijos.map((hijo, index) => `
+            <h4>Hijo ${index + 1}</h4>
+            <p><strong>Apellido y Nombre:</strong> ${hijo.apellidoynombre}</p>
+            <p><strong>Edad:</strong> ${hijo.edad}</p>
+            <p><strong>Ciclo Lectivo:</strong> ${hijo.ciclolectivo}</p>
+            <p><strong>Escuela:</strong> ${hijo.escuela}</p>
+            <p><strong>Estatal:</strong> ${hijo.estatal ? 'Sí' : 'No'}</p>
+            <p><strong>Privada:</strong> ${hijo.privada ? 'Sí' : 'No'}</p>
+            <p><strong>Talle Guardapolvo:</strong> ${hijo.talleguardapolvo || 'No aplica'}</p>
   
-    //         <h4>Archivos Adjuntos del Hijo ${index + 1}</h4>
-    //         <ul>
-    //           <li><strong>DNI Frente:</strong> ${hijo.dnifrente ? `<a href="cid:dnifrente_${index}">Descargar</a>` : 'No adjunto'}</li>
-    //           <li><strong>DNI Dorso:</strong> ${hijo.dnidorso ? `<a href="cid:dnidorso_${index}">Descargar</a>` : 'No adjunto'}</li>
-    //           <li><strong>Constancia de Alumno Regular o Boletín:</strong> ${hijo.constanciaBoletin ? `<a href="cid:constanciaBoletin_${index}">Descargar</a>` : 'No adjunto'}</li>
-    //         </ul>
-    //       `).join('')}
-    //     `,
-    //   attachments
-    // };
-    // //return res.status(200).json({ message: 'User updated and email sent successfully' });
-    // log('Formulario pre send mail:', { flag: 'a+' }, err => { });
-    // // Envía el correo electrónico
-    // transporter.sendMail(mailOptions, (err, info) => {
-    //   if (err) {
-    //     console.error('Error sending email:', err);  // Muestra más detalles sobre el error
-    //     //log('Formulario error sending mail:'+JSON.stringify(err), { flag: 'a+' }, err => {});
-    //     return res.status(500).json({ error: 'Failed to send email' });
-    //   }
-    //   console.log('Email sent:', info.response);
-    //   res.status(200).json({ message: 'Formulario enviado y correo electrónico enviado exitosamente' });
-    // });
+            <h4>Archivos Adjuntos del Hijo ${index + 1}</h4>
+            <ul>
+              <li><strong>DNI Frente:</strong> ${hijo.dnifrente ? `<a href="cid:dnifrente_${index}">Descargar</a>` : 'No adjunto'}</li>
+              <li><strong>DNI Dorso:</strong> ${hijo.dnidorso ? `<a href="cid:dnidorso_${index}">Descargar</a>` : 'No adjunto'}</li>
+              <li><strong>Constancia de Alumno Regular o Boletín:</strong> ${hijo.constanciaBoletin ? `<a href="cid:constanciaBoletin_${index}">Descargar</a>` : 'No adjunto'}</li>
+            </ul>
+          `).join('')}
+        `,
+      attachments
+    };
+    //return res.status(200).json({ message: 'User updated and email sent successfully' });
+    log('Formulario pre send mail:', { flag: 'a+' }, err => { });
+    // Envía el correo electrónico
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.error('Error sending email:', err);  // Muestra más detalles sobre el error
+        //log('Formulario error sending mail:'+JSON.stringify(err), { flag: 'a+' }, err => {});
+        return res.status(500).json({ error: 'Failed to send email' });
+      }
+      console.log('Email sent:', info.response);
+      res.status(200).json({ message: 'Formulario enviado y correo electrónico enviado exitosamente' });
+    });
 
   } catch (err) {
     console.error('Error processing form data:', err);
