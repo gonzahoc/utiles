@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/backend/utiles/static/css/main.a4226f9d.css",
+    "main.js": "/backend/utiles/static/js/main.9e808cc3.js",
+    "index.html": "/backend/utiles/index.html",
+    "main.a4226f9d.css.map": "/backend/utiles/static/css/main.a4226f9d.css.map",
+    "main.9e808cc3.js.map": "/backend/utiles/static/js/main.9e808cc3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a4226f9d.css",
+    "static/js/main.9e808cc3.js"
+  ]
+}

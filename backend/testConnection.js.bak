@@ -1,0 +1,65 @@
+const http = require('http');
+const net = require('net');
+const exec = require('child_process').exec;
+
+// Variables para configurar
+const DOMAIN = 'stipa.org.ar';
+const PORT_TO_TEST = 3000; // Cambia esto al puerto que estás usando
+const API_URL = `http://${DOMAIN}:${PORT_TO_TEST}/backend/api/login`;
+
+// Función para verificar si el puerto está escuchando
+function checkPort(port, callback) {
+    const server = net.createServer();
+    server.once('error', function (err) {
+        if (err.code === 'EADDRINUSE') {
+            callback(null, true); // El puerto está en uso
+        } else {
+            callback(err);
+        }
+    });
+    server.once('listening', function () {
+        server.close();
+        callback(null, false); // El puerto no está en uso
+    });
+    server.listen(port);
+}
+
+// Probar la conectividad con el backend
+function testBackendConnectivity(url) {
+    http.get(url, (res) => {
+        console.log(`Conexión exitosa al backend: ${url}`);
+        console.log(`Estado: ${res.statusCode}`);
+        res.on('data', (chunk) => {
+            console.log(`Respuesta del backend: ${chunk}`);
+        });
+    }).on('error', (e) => {
+        console.log(`Error al conectarse al backend: ${e.message}`);
+    });
+}
+
+// Probar conectividad con cURL desde el mismo servidor
+function testCurlCommand() {
+    const command = `curl -I ${API_URL}`;
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            console.log(`Error ejecutando cURL: ${stderr}`);
+        } else {
+            console.log(`Resultado de cURL:\n${stdout}`);
+        }
+    });
+}
+
+// Verificar si el puerto está en uso
+checkPort(PORT_TO_TEST, (err, inUse) => {
+    if (err) {
+        console.error(`Error verificando el puerto ${PORT_TO_TEST}:`, err.message);
+    } else if (inUse) {
+        console.log(`El puerto ${PORT_TO_TEST} está en uso.`);
+        // Probar la conectividad con el backend
+        testBackendConnectivity(API_URL);
+        // Ejecutar el comando cURL
+        testCurlCommand();
+    } else {
+        console.log(`El puerto ${PORT_TO_TEST} no está en uso. Parece que el servidor no está escuchando.`);
+    }
+});
